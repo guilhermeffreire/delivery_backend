@@ -1,24 +1,14 @@
 import { Router } from "express";
-import { CreateClientController } from "./modules/clients/useCases/createClient/CreateClientController";
-import { AuthenticateClientController } from "./modules/account/authenticateClient/AuthenticateClienteController";
-import { CreateDeliverymanController } from "./modules/deliveryman/useCases/createDeliveryman/CreateDeliverymanController";
-import { AuthenticateDeliverymanController } from "./modules/account/authenticateDeliveryman/AuthenticateDeliverymanController";
+import { routesAuthenticate } from "./modules/account/routesAuthenticate";
+import { routesDeliveryman } from "./modules/deliveryman/routesDeliveryman";
+import { routesClient } from "./modules/clients/routesClients";
+import { routesDelivery } from "./modules/deliveries/routesDelivery";
 
 const routes = Router();
 
-const createClientController = new CreateClientController();
-const authenticateClientController = new AuthenticateClientController();
-const authenticateDeliverymanController =
-  new AuthenticateDeliverymanController();
-const createDeliverymanController = new CreateDeliverymanController();
-
-routes.post("/client/", createClientController.handle);
-routes.post("/client/authenticate/", authenticateClientController.handle);
-
-routes.post("/deliveryman/", createDeliverymanController.handle);
-routes.post(
-  "/deliveryman/authenticate/",
-  authenticateDeliverymanController.handle
-);
+routes.use(routesDelivery);
+routes.use(routesAuthenticate);
+routes.use(routesDeliveryman);
+routes.use(routesClient);
 
 export { routes };
