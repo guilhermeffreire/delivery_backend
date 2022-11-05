@@ -26,7 +26,7 @@ export class AuthenticateDeliverymanUseCase {
       throw new Error("Username or Password incorrect!");
     }
 
-    const token = sign({ username }, "b91160d8ba7beb59f53b24d33f472ef9", {
+    const token = sign({ username }, "98d7fc1c47596c741f869d874ee37980", {
       subject: deliveryman.id,
       expiresIn: "1d",
     });
